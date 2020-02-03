@@ -1,0 +1,38 @@
+body {
+    padding: 0;
+    text-align: center;
+  }
+.game-intro {
+    text-align: center;
+    padding: 0% 10%;
+  }
+
+.game-intro p {
+    font-size: 18px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+  }
+
+.arrows-img {
+    width: 100px;
+  }
+body button {
+    font-size: 30px;
+    background-color: #ffda0a;
+    color: #fff;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+ #game-board {
+    float: center;
+    padding: 20px 0px;
+
+}
+canvas{
+  border: 1px solid white;
+    
+ 
+  }
+  
