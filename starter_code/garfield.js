@@ -1,104 +1,46 @@
-window.onload = function () {
+//Step 1 : Get the canvas element
+var canvas = document.getElementById("canvas");
+console.log(canvas);
 
-  //Get the canvas element
-  var canvas = document.getElementById("canvas");
-  console.log(canvas);
+//1.1 Set position and size of canvas
+canvas.style.position = 'center';
+canvas.width = 1200;
+canvas.height = 600;
 
-  //Set position and size of canvas
-  canvas.style.position = 'center';
-  canvas.width = 800;
-  canvas.height = 600;
+//Step 2 : Get the context from canvas
+var ctx = canvas.getContext('2d');
+console.log(ctx);
 
-  //Get the context from canvas
-  var ctx = canvas.getContext('2d');
-  console.log(ctx);
+//Step 3 : define all img
+let garfield = new Image();
+let bg = new Image();
+let bird = new Image();
+let cactus= new Image();
+let donut = new Image();
+let ground = new Image();
 
-  document.getElementById("start-button").onclick = function () {
-    startGame();
-  };
+garfield.src = 'images/garfieldEating.png';
+bg.src = 'images/background.jpg';
+bird.src = 'images/bird.png';
+cactus.src = 'images/cactus.png';
+//ground.src = 'images/';
+//donut.src = 'images/';
 
+//Step 3 : draw function
+function draw(){
+  ctx.drawImage(bg,0,0, canvas.width, canvas.height);
+  ctx.drawImage(garfield,500,450, 120,120);
+  ctx.drawImage(cactus, 670, 400, 160,160);
+  ctx.drawImage(bird,670,100,100,100);
 
-function startGame() {
-  console.log("startGame");
-  drawBoard();
-  drawCat();
-
-
+  window.requestAnimationFrame(draw);
 }
 
-// Draw the main Board
-function drawBoard() {
+//Entry point for the game
+document.getElementById("start-button").onclick = function () {
+  draw();
+};
 
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  let img = new Image();
-  img.src = './images/background.png';
-  let backgroundImage = {
-    img: img,
-    x: 0,
-    speed: -1,
-
-    move: function () {
-      this.x += this.speed;
-      this.x %= canvas.width;
-    },
-
-    draw: function () {
-      ctx.drawImage(this.img, this.x, 0, canvas.height, canvas.width);
-      if (this.speed < 0) {
-        ctx.drawImage(this.img, this.x + canvas.width, 0);
-      } else {
-        ctx.drawImage(this.img, this.x - this.img.width, 0);
-      }
-    },
-  };
-
-  function updateCanvas() {
-    backgroundImage.move();
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    backgroundImage.draw();
-    drawCat()
-    requestAnimationFrame(updateCanvas);
-
-  }
-
-  // start calling updateCanvas once the image is loaded
-  img.onload = updateCanvas;
-
-}
-
-this.cat = {
-  x: canvas.width / 2 - 30,
-  y: canvas.height * 3 / 4 - 150,
-  width: 200,
-  height: 200,
-  moveUp: () => 
-    cat.y-=100,
-  moveDown: () =>
-    cat.y+=100,
-  moveRight: () =>
-   canvas.width+=100,
-   moveLeft: () =>
-   canvas.width-+100
-
-}
-function drawCat() {
-  let img1 = new this.Image();
-  img1.src = 'images/garfieldEating.png';
-
-  ctx.drawImage(img1, cat.x, cat.y, cat.width, cat.height); //draws the cat depending on the coords in the obj above 
-}
-}
-
-document.onkeydown = function(e) {
-  switch (e.keyCode) {
-    case 38: cat.moveUp();    console.log('up',    cat); break;
-    case 40: cat.moveDown();  console.log('down',  cat); break;
-    case 37: cat.moveLeft();  console.log('left',  cat); break;
-    case 39: cat.moveRight(); console.log('right', cat); break;
-  }
-}
 
 
 
