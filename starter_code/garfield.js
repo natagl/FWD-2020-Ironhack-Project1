@@ -78,21 +78,21 @@ die_audio.src ="sound/die.mp3";
 //Play the Intro Sound as soon as the page loads
 
 
-window.onload = function() {  
+let playing = false; 
+
+window.onmousemove = function() {  
+  console.log(playing)
+  if(playing){
+    return 
+  }
+
+  
   intro_audio.volume = 0.2;
-  intro_audio.loop = true;
+  //intro_audio.loop = true;
   intro_audio.play();
   let playPromise = intro_audio.play();
 
-  if (playPromise !== undefined) {
-    playPromise.then(_ => {
-    })
-    .catch(error => {
-      console.log(error);
-       //Auto-play was prevented
-       //Show paused UI.
-    });
-  }
+  playing = true;
 }
 
 //Step: 4: Create Obstacle Array
@@ -279,13 +279,14 @@ document.getElementById("start-button").onclick = function () {
   //When clicked first, we will remove menu, image and buttons;
   hideMenu();
   //First, we stop the intro music
+  console.log(intro_audio)
   intro_audio.pause();
   intro_audio.currentTime = 0;
   //And then play game Start Music
   gameStart_audio.volume = 0.2;
   gameStart_audio.play();
   //And wait 1.2 second and play game Play sound
-  gamePlay_audio.loop = true;
+  //gamePlay_audio.loop = true;
   setTimeout("gamePlay_audio.play()",1200);
 
   draw();
