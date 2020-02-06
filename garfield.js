@@ -255,7 +255,7 @@ function draw(){
   
  //ctx.fillStyle = "black";
   ctx.font = "bold 40px Lobster";  
-  ctx.fillText("Score : " + score , (canvas.width / 2) - 17, (canvas.height / 2) -300);
+  ctx.fillText("Score : " + score , (canvas.width) - 00, (canvas.height / 2) -100);
 
   continuosObstacledraw();
   ctx.drawImage(roadImg, -120 , heightfromBottomOfRoad, 1800, heightOfRoad);
