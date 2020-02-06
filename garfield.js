@@ -7,9 +7,8 @@ let canvas = document.getElementById("canvas");
 
 //1.1 Set position and size of canvas
 canvas.style.position = 'center';
-canvas.width = 1600;
-canvas.height = 800;
-
+canvas.width = window.innerWidth - 100
+canvas.height = window.innerHeight - 100
 //Step 2 : Get the context from canvas
 var ctx = canvas.getContext('2d');
 //console.log(ctx);
@@ -25,9 +24,35 @@ let garfield = {
   y: garfieldGapFromRoad,
   width: 150,
   height: 150,
+  speedX : 0,
+  speedY : 0,    
+  gravity : 0.1, //1
+  gravitySpeed : 0.3, //2 
+  bounce : 0.2, //3 
+ 
+  fall : function() {
+    this.gravitySpeed += this.gravity;
+    this.x += this.speedX;
+    this.y += this.speedY + this.gravitySpeed;
+    this.hitBottom();
+},
+hitBottom : function() {
+    var rockbottom = canvas.height - this.height //myGameArea.canvas.height - this.height;
+    if (this.y > rockbottom) {
+        this.y = rockbottom;
+        this.gravitySpeed = -(this.gravitySpeed * this.bounce);
+    }
+},
   moveUp: () => {
-    if(garfield.y >= 50)
-    garfield.y-=50
+    
+    //if(garfield.y >= 50)
+    let int = setInterval(()=>{
+      garfield.y -=15
+      if(garfield.y < -100){
+        clearInterval(int)
+      }
+    },5)
+   // garfield.y-=250
   },
   moveDown: () => {
     if(garfield.y < garfieldGapFromRoad){
@@ -180,7 +205,7 @@ function startObs(){
       //console.log()
     }
     obstacles.push(obstacle)
-  },1000)
+  },5000) //how many obstacels
 }
 
 
@@ -236,6 +261,7 @@ function draw(){
   ctx.drawImage(roadImg, -120 , heightfromBottomOfRoad, 1800, heightOfRoad);
 
   glowImg(10);
+  garfield.fall() 
   ctx.drawImage(garfieldImg, garfield.x, garfield.y, garfield.width, garfield.height);
   restoreGlow();
   
@@ -251,6 +277,8 @@ function hideMenu(){
   {
     startUp[i].style.display = 'none';
   }
+  document.querySelector('canvas').style.display = 'block'
+
 }
 
 
