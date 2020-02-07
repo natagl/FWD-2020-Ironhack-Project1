@@ -1,42 +1,43 @@
 body {
-    padding: 0;
-    text-align: center;
-    background-color: papayawhip;
+  padding: 0;
+  text-align: center;
+  background-color: papayawhip;
   }
 .game-intro {
-    text-align: center;
-    padding: 0% 10%;
+  text-align: center;
+  padding: 0% 10%;
   }
 .logo-img{
   width: 575px;
   height: 400px;
   
 }
-
 .game-intro p {
-    font-size: 20px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    padding-top: 0px;
+  font-size: 20px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  padding-top: 0px;
      }
 
 .arrows-img {
-    width: 100px;
+  width: 100px;
   }
 
 body button {
-    font-size: 30px;
-    background-color: orange;
-    color: black;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 20px;
+  font-size: 30px;
+  background-color: orange;
+  color: black;
+  padding: 20px 40px;
+  border: 0;
+  box-shadow: 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
   }
 
 canvas{
   padding-top: 50px;
   display:none;
+  position: center;
+  padding-left: 40px;
 }
 
 #rules {
