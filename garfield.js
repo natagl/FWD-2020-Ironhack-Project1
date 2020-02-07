@@ -5,7 +5,6 @@ let garfieldGapFromRoad = heightfromBottomOfRoad -140;
 
 //Garfield object
 let garfield = {
-  //Garfield's property
   x: 500,
   y: garfieldGapFromRoad,
   width: 150,

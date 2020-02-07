@@ -13,7 +13,7 @@ canvas.height = window.innerHeight - 100
 var ctx = canvas.getContext('2d');
 //console.log(ctx);
 
-//Play the Intro Sound as soon as the page loads
+
 let playing = false; 
 
 //Flag to determine if Garfield had collision with obstacles
@@ -45,7 +45,7 @@ function hideMenu(){
     }
     document.querySelector('canvas').style.display = 'block'
   
-  }
+}
 
 //Keep drawing obstacles
 function continuosObstacledraw(){
@@ -103,21 +103,17 @@ function startObs(){
   }
   
   //Step 3 : Draw Function
-  function draw(){  
+function draw(){  
+   
+  frameId = window.requestAnimationFrame(draw);
   
-    //console.log(obstacles)
-    
-    frameId = window.requestAnimationFrame(draw);
+   checkCollision(garfield, obstacles);
+   ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+   ctx.font = "bold 40px Lobster";  
+   ctx.fillText("Score : " + score , (canvas.width) - 200, (canvas.height / 2) -100);
   
-    checkCollision(garfield, obstacles);
-    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-    
-   //ctx.fillStyle = "black";
-    ctx.font = "bold 40px Lobster";  
-    ctx.fillText("Score : " + score , (canvas.width) - 200, (canvas.height / 2) -100);
-  
-    continuosObstacledraw();
-    ctx.drawImage(roadImg, -120 , heightfromBottomOfRoad, 1800, heightOfRoad);
+   continuosObstacledraw();
+   ctx.drawImage(roadImg, -120 , heightfromBottomOfRoad, 1800, heightOfRoad);
   
     glowImg(10);
     garfield.fall() 
@@ -125,13 +121,26 @@ function startObs(){
     restoreGlow();
     
     if(didCollide === true){
-      ctx.drawImage(gameOverImg, canvas.width/2-gameOverImg.width/2, canvas.height/2-gameOverImg.height/2, gameOverImg.width, gameOverImg.height);
-      window.cancelAnimationFrame(frameId);
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.drawImage(gameOverImg, canvas.width/2-gameOverImg.width/2, canvas.height/2-gameOverImg.height/2, gameOverImg.width, gameOverImg.height);
+        window.cancelAnimationFrame(frameId);
+        reset();
     }
-   
-  }
+}
+function reset (){
+    
+    let button = document.createElement('button');
+    button.innerHTML = "HOME";
+    let canvas = document.getElementsByTagName('body')[0]
+    canvas.appendChild(button);
+    button.addEventListener ("click", function() {
+        window.location.replace('?q=restart')
+    })
+     
+    list = [];
   
-  //Todo: create a gap for cactus collision
+  }
+
   function checkCollision(rect1, obstacles){
     obstacles && obstacles.forEach((rect2, index) => {
       if ((rect1.x < rect2.x + rect2.width - 5)  &&
@@ -149,29 +158,34 @@ function startObs(){
             }     
       }
     })
-  }
+  };
   
   //Entry point for the game
-  document.getElementById("start-button").onclick = function () {
+  document.getElementById("start-button").onclick = startGame;
+
+  function startGame (){
+
     //When clicked first, we will remove menu, image and buttons;
     hideMenu();
     //First, we stop the intro music
     console.log(intro_audio)
-    intro_audio.pause();
-    intro_audio.currentTime = 0;
-    //And then play game Start Music
+   
+    //Plays game Start Music
     gameStart_audio.volume = 0.2;
     gameStart_audio.play();
-    //And wait 1.2 second and play game Play sound
-    //gamePlay_audio.loop = true;
+    
     setTimeout("gamePlay_audio.play()",1200);
-  
     draw();
     startObs()
     checkCollision();//Check if garfiels has hit an obstacle
-  
-   
+
   };
 
-
+     console.log(window.location.href)
+    if(window.location.href.includes("restart")){
+      setTimeout(function(){ ///use js event loop so this is in th end of the queue 
+        document.querySelector('#start-button').click();
+      },0)
+    
+  };
   

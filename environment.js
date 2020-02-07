@@ -32,7 +32,6 @@ die_audio.src ="sound/die.mp3";
 
 //Step: 4: Create Obstacle Array
 let obstacles = [];
-
 //create first obstacle object
 obstacles[0] = {
   x: canvas.width,
@@ -40,7 +39,7 @@ obstacles[0] = {
   img: cactusImg
 }
 
-//Variables to control obstacle height and width
+// Variables to control obstacle height and width
 //Cactus dimensions
 let cactusImgWidth = cactusImg.width*0.3;
 let cactusImgHeight = cactusImg.height*0.4;
@@ -82,8 +81,7 @@ let frameId;
 
 let allObstacles = [cactus, bird, donut];
 
-function glowImg(glowLevel)
-{
+function glowImg(glowLevel){
   ctx.shadowBlur = glowLevel;
   ctx.shadowColor = "white";
 }
