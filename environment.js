@@ -1,5 +1,3 @@
-
-
 //Step 3.1 : define all img
 let garfieldImg = new Image();
 let bg = new Image();
@@ -18,26 +16,15 @@ roadImg.src = 'images/road.png';
 gameOverImg.src = 'images/gameOver.png';
 
 //Step 3.2 : define all audio files
-let intro_audio = new Audio();
 let gameStart_audio = new Audio();
 let gamePlay_audio = new Audio();
 let eat_audio = new Audio();
 let die_audio = new Audio();
 
-intro_audio.src ="sound/intro.mp3";
 gameStart_audio.src ="sound/gameStart.mp3";
 gamePlay_audio.src ="sound/gamePlay.mp3";
 eat_audio.src ="sound/eat.mp3";
 die_audio.src ="sound/die.mp3";
-
-//Step: 4: Create Obstacle Array
-let obstacles = [];
-//create first obstacle object
-obstacles[0] = {
-  x: canvas.width,
-  y: canvas.height-(cactusImg.height*0.5)-50,
-  img: cactusImg
-}
 
 // Variables to control obstacle height and width
 //Cactus dimensions
@@ -77,6 +64,16 @@ let donut = {
   height: 60,
   type:'donut'
 } 
+
+//Step: 4: Create Obstacle Array
+let obstacles = [];
+//create first obstacle object
+obstacles[0] = {
+  x: cactus.x,
+  y: cactus.y,
+  img: cactusImg
+}
+
 let frameId;
 
 let allObstacles = [cactus, bird, donut];

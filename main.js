@@ -19,24 +19,6 @@ let playing = false;
 //Flag to determine if Garfield had collision with obstacles
 let didCollide = false; 
 
-//As the page loads, the first click anywhere but on the "Start Game" button will 
-//play intro_audio
-/*
-window.onclick = function() {  
-  console.log(playing)
-  if(playing){
-    return 
-  }  
-  
-  //Reduce the volume 
-  intro_audio.volume = 0.2;
-  //Make the audio in a loop so it keeps playing continuosly 
-  intro_audio.loop = true;
-  intro_audio.play();
-
-  playing = true;
-}*/
-
 //If 'Start Game' button is clicked, the menu will be hidden
 function hideMenu(){
     for(var i = 0; i < startUp.length; i++)
@@ -50,22 +32,21 @@ function hideMenu(){
 //Keep drawing obstacles
 function continuosObstacledraw(){
     for(let i = 0; i < obstacles.length ; i++){
-      // console.log(obstacles, obstacles[i])
-      if(obstacles[i].type == 'bird'){
-        ctx.drawImage(obstacles[i].img, obstacles[i].x, obstacles[i].y, obstacles[i].width, birdImgHeight);
-      }
-      if(obstacles[i].type == 'cactus'){
-        ctx.drawImage(obstacles[i].img, obstacles[i].x, obstacles[i].y, cactusImgWidth, cactusImgHeight);
-      }
-      if(obstacles[i].type == 'donut'){
-        ctx.drawImage(obstacles[i].img, obstacles[i].x, obstacles[i].y, donut.width, donut.height);
-        restoreGlow()
+      if(obstacles[i].img.complete){
+        // console.log(obstacles, obstacles[i])
+        if(obstacles[i].type == 'bird'){
+          ctx.drawImage(obstacles[i].img, obstacles[i].x, obstacles[i].y, bird.width, bird.height);
+        }
+        if(obstacles[i].type == 'cactus'){
+          ctx.drawImage(obstacles[i].img, obstacles[i].x, obstacles[i].y, cactus.width, cactus.height);
+        }
+        if(obstacles[i].type == 'donut'){
+          ctx.drawImage(obstacles[i].img, obstacles[i].x, obstacles[i].y, donut.width, donut.height);
+          restoreGlow()
+        }
       }
   
       obstacles[i].x = obstacles[i].x - 5;      
-      /*if(obstacles[i].x == canvasWidthWhenToCreateNextObstacle){
-  
-      }*/
     }
 }
 
@@ -81,7 +62,7 @@ function startObs(){
         //console.log()
       }
       obstacles.push(obstacle)
-    },5000) //how many obstacels
+    },2000) //how many obstacels
   }
   
   //Step 4 adding event on key down(make it move with arrows)
@@ -167,13 +148,12 @@ function reset (){
 
     //When clicked first, we will remove menu, image and buttons;
     hideMenu();
-    //First, we stop the intro music
-    console.log(intro_audio)
    
     //Plays game Start Music
     gameStart_audio.volume = 0.2;
     gameStart_audio.play();
     
+    gamePlay_audio.loop = true;
     setTimeout("gamePlay_audio.play()",1200);
     draw();
     startObs()
