@@ -1,7 +1,7 @@
 # FWD-2020-Ironhack-Project1
 Garfield Eats      
 
-Introduction
+### Introduction
  2d  Game written entirely in JavaScript and rendered on HTML5  <canvas>. 
 	
 <img src="/Screenshots/1.png" width="1000"> 
@@ -28,7 +28,7 @@ But Garfield has to be careful about deadly Obstacles. Once he touches any of th
 <img src="/Screenshots/2.png" width="1000"> 
 
 
-Built With
+### Built With
 
 ⦁	HTML
 
